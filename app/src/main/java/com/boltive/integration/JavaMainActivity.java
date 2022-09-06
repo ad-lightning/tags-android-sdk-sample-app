@@ -42,6 +42,7 @@ public class JavaMainActivity extends AppCompatActivity {
     private void initViews() {
         getSupportActionBar().setTitle("Boltive SDK v" + BoltiveMonitor.SDK_VERSION + " App");
         binding.btnToJava.setVisibility(View.GONE);
+        binding.btnReload.setVisibility(View.GONE);
     }
 
     private void initBoltiveMonitor() {
@@ -53,9 +54,9 @@ public class JavaMainActivity extends AppCompatActivity {
 
     private void initAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
-        int bannerWidth = 320;
-        int bannerHeight = 50;
-        String adUnitId = "/6499/example/banner";
+        int bannerWidth = 300;
+        int bannerHeight = 250;
+        String adUnitId = "/21808260008/boltive-banner-with-ok-and-bad-url";
 
         adView = new AdManagerAdView(this);
         adView.setAdSize(new AdSize(bannerWidth, bannerHeight));

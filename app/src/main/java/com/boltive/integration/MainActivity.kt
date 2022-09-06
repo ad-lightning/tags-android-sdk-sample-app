@@ -2,7 +2,6 @@ package com.boltive.integration
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.boltive.api.AdViewConfiguration
@@ -37,10 +36,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         supportActionBar?.title = "Boltive SDK v${BoltiveMonitor.SDK_VERSION} App"
-        binding.btnToJava.setOnClickListener {
-            startActivity(
-                Intent(this, JavaMainActivity::class.java)
-            )
+        binding.apply {
+            btnToJava.setOnClickListener {
+                startActivity(
+                    Intent(this@MainActivity, JavaMainActivity::class.java)
+                )
+            }
+            btnReload.setOnClickListener {
+                adView.loadAd(AdRequest.Builder().build())
+            }
         }
     }
 
@@ -54,9 +58,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAd() {
         val adRequest = AdRequest.Builder().build()
-        val bannerWidth = 320
-        val bannerHeight = 50
-        val adUnitId = "/6499/example/banner"
+        val bannerWidth = 300
+        val bannerHeight = 250
+        val adUnitId = "/21808260008/boltive-banner-with-ok-and-bad-url"
 
         adView = AdManagerAdView(this)
         adView.setAdSize(AdSize(bannerWidth, bannerHeight))
