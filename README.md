@@ -12,13 +12,14 @@ References:
 
 ## Integration guide
 
-Create folder `libs` in your `app` module. Copy `Boltive.aar` file from archive to `libs`.
+Create folder `libs` in your `app` module. Copy `boltive-android-sdk.aar` file from archive
+to `libs`.
 
 Add Boltive SDK dependency in app's `build.gradle` file and sync Gradle.
 
 ```groovy
 dependencies {
-    implementation files("libs/Boltive.aar")
+    implementation files("libs/boltive-android-sdk.aar")
 }
 ```
 
