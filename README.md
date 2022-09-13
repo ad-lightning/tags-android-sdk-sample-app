@@ -31,8 +31,8 @@ and `BoltiveListener` instance as parameters.  `BoltiveListener` is called in th
 when `BoltiveMonitor` detects an ad that is supposed to be blocked.
 
 **Note**: Unlike web, on mobile `BoltiveMonitor` does not actually block or prevent any ads from
-rendering - it only reports them and signals to the app native code. It is your responsibility as
-the app developer to take appropriate action in the callback closure: i.e. to reload and refresh the
+rendering - it only reports them and signals to the app native code. **It is your responsibility as
+the app developer to take appropriate action in the callback closure**: i.e. to reload and refresh the
 banner, render a different ad unit, remove the banner alltogether etc. The most common action to
 take would be to reload the banner.
 
@@ -92,7 +92,7 @@ the view tree.
 
 ### GAM Interstitial
 
-Add `captureInterstitial` call before calling `interstitial.show`.  Also please add a call `stopCapturingInterstitial` inside interstitial's `FullScreenContentCallback.onAdDismissedFullScreenContent`.
+Add `captureInterstitial` call before calling `interstitial.show`.  Also make sure you call `BoltiveMonitor.stopCapturingInterstitial` inside interstitial's `FullScreenContentCallback.onAdDismissedFullScreenContent`, see example below:
 
 ```java
     AdRequest adRequest = new AdRequest.Builder().build();
@@ -119,6 +119,8 @@ Add `captureInterstitial` call before calling `interstitial.show`.  Also please 
         });
     };
 ```
+
+**Note:** When Boltive SDK detects an offensive interstitial - it automatically blocks and dismisses it (contrary to the behavior for banners, where it is a developer responsibility), providing you with a callback (you implement it as an anonymous function passed to `BoltiveMonitor.captureInterstitial`) where you can reload the interstitial and/or perform any other side effects as necessary.
 
 ## Other Ad Networks and SDKs
 
