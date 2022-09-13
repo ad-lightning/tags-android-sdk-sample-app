@@ -6,9 +6,7 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 
 - SDK currently supports banner ad format.
 
-- We assume that the app integrates Google Mobile Ads SDK and works with Google Ad Manager, however
-  the SDK is not limited by this assumption,
-  see [this section](https://github.com/ad-lightning/android-sdk-sample-app#other-ad-networks-and-sdks)
+- We assume that the app integrates Google Mobile Ads SDK and works with Google Ad Manager, however the SDK is not limited by this assumption, see [this section](https://github.com/ad-lightning/android-sdk-sample-app#other-ad-networks-and-sdks)
 
 - The current SDK version is 0.2 (private beta).
 
@@ -20,9 +18,9 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 4. Add Boltive SDK dependency in app's `build.gradle` file and sync Gradle.
 
 ```groovy
-dependencies {
-    implementation files("libs/boltive-android-sdk.aar")
-}
+    dependencies {
+        implementation files("libs/boltive-android-sdk.aar")
+    }
 ```
 
 ## User Guide
@@ -43,9 +41,9 @@ take would be to reload the banner.
 Create Boltive monitor instance.
 
 ```java
-    private final BoltiveMonitor boltiveMonitor=new BoltiveMonitor(
-        new BoltiveConfiguration("<your client id>","<your ad platform name>")
-        );
+    private final BoltiveMonitor boltiveMonitor = new BoltiveMonitor(
+        new BoltiveConfiguration("<your client id>", "<your ad platform name>")
+    );
 ```
 
 ### GAM Banner
@@ -53,29 +51,29 @@ Create Boltive monitor instance.
 Add `capture` call inside AdListener's `onAdLoaded` with listener.
 
 ```java
-    AdRequest adRequest=new AdRequest.Builder().build();
-        gamBannerView.setAdListener(new AdListener(){
-@Override
-public void onAdLoaded(){
-        AdViewConfiguration adViewConfiguration=new AdViewConfiguration(
-        "<banner width>","<banner height>","<your ad unit id>"
-        );
-        boltiveMonitor.capture(gamBannerView,adViewConfiguration,()->{
-        gamBannerView.loadAd(adRequest);
-        });
+    AdRequest adRequest = new AdRequest.Builder().build();
+    gamBannerView.setAdListener(new AdListener() {
+        @Override
+        public void onAdLoaded() {
+            AdViewConfiguration adViewConfiguration = new AdViewConfiguration(
+                "<banner width>", "<banner height>", "<your ad unit id>"
+            );
+            boltiveMonitor.capture(gamBannerView, adViewConfiguration, ()-> {
+                gamBannerView.loadAd(adRequest);
+            });
         }
-        });
-        gamBannerView.loadAd(adRequest);
+    });
+    gamBannerView.loadAd(adRequest);
 ```
 
 Add `destroy` call when ad view destroyed or inside `onDestroy` of Activity (or Fragment).
 
 ```java
     @Override
-protected void onDestroy(){
+    protected void onDestroy(){
         super.onDestroy();
         boltiveMonitor.terminate();
-        }
+    }
 ```
 
 ### GAM example with removing banner from view tree
@@ -84,12 +82,12 @@ If you don't want to show any ad when it was blocked at least once, you can remo
 the view tree.
 
 ```java
-    boltiveMonitor.capture(gamBannerView,adViewConfiguration,()->{
-        ViewParent parent=gamBannerView.getParent();
-        if(parent instanceof ViewGroup){
-        ((ViewGroup)parent).removeView(gamBannerView);
+    boltiveMonitor.capture(gamBannerView, adViewConfiguration, () -> {
+        ViewParent parent = gamBannerView.getParent();
+        if (parent instanceof ViewGroup){
+            ((ViewGroup) parent).removeView(gamBannerView);
         }
-        }
+    }
 ```
 
 ### GAM Interstitial
@@ -98,29 +96,29 @@ Add `captureInterstitial` call inside AdManagerInterstitialAdLoadCallback's `onA
 and `stopCapturingInterstitial` inside FullScreenContentCallback's `onAdDismissedFullScreenContent`.
 
 ```java
-    AdRequest adRequest=new AdRequest.Builder().build();
-        AdManagerInterstitialAd.load(this,"<your ad unit id>",adRequest,new InterstitialAdLoadCallback(){
-@Override
-public void onAdLoaded(@NonNull InterstitialAd interstitialAd){
-        super.onAdLoaded(interstitialAd);
-
-        AdViewConfiguration viewConfiguration=new AdViewConfiguration(
-        320,480,"<your ad unit id>"
-        );
-        boltiveMonitor.captureInterstitial(getApplication(),viewConfiguration,()->{
-        // Any Actions
-        })
-
-        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
-@Override
-public void onAdDismissedFullScreenContent(){
-        super.onAdDismissedFullScreenContent();
-        boltiveMonitor.stopCapturingInterstitial();
-        }
+    AdRequest adRequest = new AdRequest.Builder().build();
+    AdManagerInterstitialAd.load(this, "<your ad unit id>", adRequest, new InterstitialAdLoadCallback() {
+        @Override
+        public void onAdLoaded(@NonNull InterstitialAd interstitialAd){
+            super.onAdLoaded(interstitialAd);
+            
+            AdViewConfiguration viewConfiguration = new AdViewConfiguration(
+                320, 480, "<your ad unit id>"
+            );
+            boltiveMonitor.captureInterstitial(getApplication(), viewConfiguration, ()-> {
+                // Any Actions
+            })
+        
+            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    super.onAdDismissedFullScreenContent();
+                    boltiveMonitor.stopCapturingInterstitial();
+                }
+            });
+            interstitialAd.show(MyActivity.this);
         });
-        interstitialAd.show(MyActivity.this);
-        });
-        };
+    };
 ```
 
 ## Other Ad Networks and SDKs
