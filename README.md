@@ -6,9 +6,11 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 
 - SDK currently supports banner ad format.
 
-- We assume that the app integrates Google Mobile Ads SDK and works with Google Ad Manager, however the SDK is not limited by this assumption, see [this section](https://github.com/ad-lightning/android-sdk-sample-app#other-ad-networks-and-sdks)
+- We assume that the app integrates Google Mobile Ads SDK and works with Google Ad Manager, however
+  the SDK is not limited by this assumption,
+  see [this section](https://github.com/ad-lightning/android-sdk-sample-app#other-ad-networks-and-sdks)
 
-- The current SDK version is 0.1 (private beta).
+- The current SDK version is 0.2 (private beta).
 
 ## Integration
 
@@ -56,8 +58,7 @@ Add `capture` call inside AdListener's `onAdLoaded` with listener.
 @Override
 public void onAdLoaded(){
         AdViewConfiguration adViewConfiguration=new AdViewConfiguration(
-        "<banner width>","<banner height>",
-        "<your ad unit id>"
+        "<banner width>","<banner height>","<your ad unit id>"
         );
         boltiveMonitor.capture(gamBannerView,adViewConfiguration,()->{
         gamBannerView.loadAd(adRequest);
