@@ -25,6 +25,9 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 
 ## User Guide
 
+
+### Banner
+
 To connect Boltive SDK with the GAM banner you should call `BoltiveMonitor.capture()` static method
 within the `AdListener`'s `onAdLoaded()` method, passing it an ad banner, clientId
 and `BoltiveListener` instance as parameters.  `BoltiveListener` is called in the event
@@ -35,9 +38,6 @@ rendering - it only reports them and signals to the app native code. **It is you
 the app developer to take appropriate action in the callback closure**: i.e. to reload and refresh the
 banner, render a different ad unit, remove the banner alltogether etc. The most common action to
 take would be to reload the banner.
-
-### BoltiveMonitor
-
 Create Boltive monitor instance.
 
 ```java
@@ -45,8 +45,6 @@ Create Boltive monitor instance.
         new BoltiveConfiguration("<your client id>", "<your ad platform name>")
     );
 ```
-
-### GAM Banner
 
 Add `capture` call inside AdListener's `onAdLoaded` with listener.
 
@@ -76,7 +74,7 @@ Add `destroy` call when ad view destroyed or inside `onDestroy` of Activity (or 
     }
 ```
 
-### GAM example with removing banner from view tree
+#### Example removing banner from view tree
 
 If you don't want to show any ad when it was blocked at least once, you can remove the ad view from
 the view tree.
@@ -90,7 +88,7 @@ the view tree.
     }
 ```
 
-### GAM Interstitial
+### Interstitial
 
 Add `captureInterstitial` call before calling `interstitial.show`.  Also make sure you call `BoltiveMonitor.stopCapturingInterstitial` inside interstitial's `FullScreenContentCallback.onAdDismissedFullScreenContent`, see example below:
 
