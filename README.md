@@ -92,8 +92,7 @@ the view tree.
 
 ### GAM Interstitial
 
-Add `captureInterstitial` call inside AdManagerInterstitialAdLoadCallback's `onAdLoaded`
-and `stopCapturingInterstitial` inside FullScreenContentCallback's `onAdDismissedFullScreenContent`.
+Add `captureInterstitial` call before calling `interstitial.show`.  Also please add a call `stopCapturingInterstitial` inside interstitial's `FullScreenContentCallback.onAdDismissedFullScreenContent`.
 
 ```java
     AdRequest adRequest = new AdRequest.Builder().build();
@@ -137,4 +136,4 @@ References:
 
 - [GMA SDK Get Started](https://developers.google.com/ad-manager/mobile-ads-sdk/android/quick-start)
 - [Banner Ads](https://developers.google.com/ad-manager/mobile-ads-sdk/android/banner)
-
+- [Interstitial Ads](https://developers.google.com/ad-manager/mobile-ads-sdk/android/interstitial)
