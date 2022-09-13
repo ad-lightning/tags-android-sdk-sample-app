@@ -58,13 +58,13 @@ public void onAdLoaded(){
         AdViewConfiguration adViewConfiguration=new AdViewConfiguration(
         "<banner width>","<banner height>",
         "<your ad unit id>"
-            );
-            boltiveMonitor.capture(gamBannerView, adViewConfiguration, () -> {
-                gamBannerView.loadAd(adRequest);
-            });
+        );
+        boltiveMonitor.capture(gamBannerView,adViewConfiguration,()->{
+        gamBannerView.loadAd(adRequest);
+        });
         }
-    });
-    gamBannerView.loadAd(adRequest);
+        });
+        gamBannerView.loadAd(adRequest);
 ```
 
 Add `destroy` call when ad view destroyed or inside `onDestroy` of Activity (or Fragment).
@@ -106,9 +106,9 @@ public void onAdLoaded(@NonNull InterstitialAd interstitialAd){
         AdViewConfiguration viewConfiguration=new AdViewConfiguration(
         320,480,"<your ad unit id>"
         );
-        boltiveMonitor.captureInterstitial(application,viewConfiguration){
-        // Any actions
-        }
+        boltiveMonitor.captureInterstitial(getApplication(),viewConfiguration,()->{
+        // Any Actions
+        })
 
         interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
 @Override
@@ -117,8 +117,9 @@ public void onAdDismissedFullScreenContent(){
         boltiveMonitor.stopCapturingInterstitial();
         }
         });
-        interstitialAd.showAd(MyActivity.this)
+        interstitialAd.show(MyActivity.this);
         });
+        };
 ```
 
 ## Other Ad Networks and SDKs
