@@ -41,7 +41,7 @@ public class JavaMainActivity extends AppCompatActivity {
 
     private void initViews() {
         getSupportActionBar().setTitle("Boltive SDK v" + BoltiveMonitor.SDK_VERSION + " App");
-        binding.btnToJava.setVisibility(View.GONE);
+        binding.btnToInterstitial.setVisibility(View.GONE);
         binding.btnReload.setVisibility(View.GONE);
     }
 

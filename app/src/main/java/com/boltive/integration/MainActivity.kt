@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         supportActionBar?.title = "Boltive SDK v${BoltiveMonitor.SDK_VERSION} App"
         binding.apply {
-            btnToJava.setOnClickListener {
+            btnToInterstitial.setOnClickListener {
                 startActivity(
-                    Intent(this@MainActivity, JavaMainActivity::class.java)
+                    Intent(this@MainActivity, InterstitialActivity::class.java)
                 )
             }
             btnReload.setOnClickListener {
