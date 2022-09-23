@@ -25,9 +25,6 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 
 ## User Guide
 
-
-### Banner
-
 To connect Boltive SDK with the GAM banner you should call `BoltiveMonitor.capture()` static method
 within the `AdListener`'s `onAdLoaded()` method, passing it an ad banner, clientId
 and `BoltiveListener` instance as parameters.  `BoltiveListener` is called in the event
@@ -38,11 +35,16 @@ rendering - it only reports them and signals to the app native code. **It is you
 the app developer to take appropriate action in the callback closure**: i.e. to reload and refresh the
 banner, render a different ad unit, remove the banner alltogether etc. The most common action to
 take would be to reload the banner.
+
+## GAM (Google Ad Manager)
+
+### BoltiveMonitor for GAM
+
 Create Boltive monitor instance.
 
 ```java
     private final BoltiveMonitor boltiveMonitor = new BoltiveMonitor(
-        new BoltiveConfiguration("<your client id>", "<your ad platform name>")
+        new BoltiveConfiguration("<your client id>")
     );
 ```
 
@@ -64,7 +66,7 @@ Add `capture` call inside AdListener's `onAdLoaded` with listener.
     gamBannerView.loadAd(adRequest);
 ```
 
-Add `destroy` call when ad view destroyed or inside `onDestroy` of Activity (or Fragment).
+Add `terminate` call when ad view destroyed or inside `onDestroy` of Activity (or Fragment).
 
 ```java
     @Override
@@ -88,7 +90,7 @@ the view tree.
     }
 ```
 
-### Interstitial
+### GAM Interstitial
 
 Add `captureInterstitial` call before calling `interstitial.show`.  Also make sure you call `BoltiveMonitor.stopCapturingInterstitial` inside interstitial's `FullScreenContentCallback.onAdDismissedFullScreenContent`, see example below:
 
@@ -120,6 +122,74 @@ Add `captureInterstitial` call before calling `interstitial.show`.  Also make su
 
 **Note:** When Boltive SDK detects an offensive interstitial - it automatically blocks and dismisses it (contrary to the behavior for banners, where it is a developer responsibility), providing you with a callback (you implement it as an anonymous function passed to `BoltiveMonitor.captureInterstitial`) where you can reload the interstitial and/or perform any other side effects as necessary.
 
+
+## Applovin MAX
+
+### BoltiveMonitor for Applovin MAX
+
+Create Boltive monitor instance. <b>IMPORTANT</b> to set second parameter `AdNetwork.APPLOVIN_MAX`.
+
+```java
+    private final BoltiveMonitor boltiveMonitor = new BoltiveMonitor(
+        new BoltiveConfiguration("<your client id>", AdNetwork.APPLOVIN_MAX)
+    );
+```
+
+### Applovin MAX Banner
+
+Add `capture` call inside MaxAdViewAdListener's `onAdLoaded` with listener.
+
+```java
+    maxAdView.setListener(new MaxAdViewAdListener() {
+        @Override
+        public void onAdLoaded(MaxAd ad) {
+            AdViewConfiguration adViewConfiguration = new AdViewConfiguration(
+                    "<banner width>", "<banner height>", "<your ad unit id>"
+            );
+            boltiveMonitor.capture(maxAdView, adViewConfiguration, () -> {
+                maxAdView.loadAd();
+            });
+        }
+        ...
+    });
+    maxAdView.loadAd();
+```
+
+Add `terminate` call when ad view destroyed or inside `onDestroy` of Activity (or Fragment).
+
+```java
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        boltiveMonitor.terminate();
+    }
+```
+
+### Applovin MAX Interstitial
+
+Add `captureInterstitial` call before calling `interstitial.showAd()`, and `stopCapturingInterstitial` inside `onAdHidden`.
+
+```java
+    MaxInterstitialAd interstitial = new MaxInterstitialAd("<your ad unit id>", this);
+    interstitial.setListener(new MaxAdListener() {
+        @Override
+        public void onAdLoaded(MaxAd ad) {
+            AdViewConfiguration viewConfiguration = new AdViewConfiguration(
+                    320, 480, "<your ad unit id>"
+            );
+            boltiveMonitor.captureInterstitial(getApplication(), viewConfiguration, () -> {});
+            interstitial.showAd();
+        }
+    
+        @Override
+        public void onAdHidden(MaxAd ad) {
+            boltiveMonitor.stopCapturingInterstitial();
+        }
+        ...
+    });
+```
+
+
 ## Other Ad Networks and SDKs
 
 `Boltive SDK` was tested against GAM and Google Mobile Ads SDK integration. However `BoltiveMonitor`
@@ -137,3 +207,11 @@ References:
 - [GMA SDK Get Started](https://developers.google.com/ad-manager/mobile-ads-sdk/android/quick-start)
 - [Banner Ads](https://developers.google.com/ad-manager/mobile-ads-sdk/android/banner)
 - [Interstitial Ads](https://developers.google.com/ad-manager/mobile-ads-sdk/android/interstitial)
+
+## Applovin MAX
+
+Applovin MAX assumes integration of Applovin MAX Mobile Ads SDK into the app.
+
+References:
+
+- [Applovin Integration](https://dash.applovin.com/documentation/mediation/android/getting-started/integration)

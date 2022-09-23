@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">BoltiveIntegration</string>
+    <string name="app_name">Boltive Integration App</string>
+    <string name="examples_description">All examples show random ad types: simple ad or ad that must be blocked. Applovin MAX examples must be run on real device to display real ad.</string>
 </resources>

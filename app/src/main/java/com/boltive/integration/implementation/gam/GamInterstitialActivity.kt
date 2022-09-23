@@ -1,34 +1,33 @@
-package com.boltive.integration
+package com.boltive.integration.implementation.gam
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.boltive.api.AdViewConfiguration
 import com.boltive.api.BoltiveConfiguration
 import com.boltive.api.BoltiveMonitor
-import com.boltive.integration.databinding.ActivityMainBinding
+import com.boltive.integration.R
+import com.boltive.integration.databinding.ActivityBannerBinding
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerInterstitialAd
 import com.google.android.gms.ads.admanager.AdManagerInterstitialAdLoadCallback
 import kotlin.random.Random
 
-class InterstitialActivity : AppCompatActivity() {
+class GamInterstitialActivity : AppCompatActivity() {
 
     private var interstitialAd: AdManagerInterstitialAd? = null
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityBannerBinding
     private lateinit var boltiveMonitor: BoltiveMonitor
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_banner)
 
-        initViews()
         initBoltiveMonitor()
+        initAd()
     }
 
     override fun onDestroy() {
@@ -36,20 +35,9 @@ class InterstitialActivity : AppCompatActivity() {
         boltiveMonitor.terminate()
     }
 
-    private fun initViews() {
-        supportActionBar?.title = "Boltive SDK v${BoltiveMonitor.SDK_VERSION} App"
-        binding.apply {
-            btnToInterstitial.visibility = View.GONE
-            btnReload.setOnClickListener {
-                initAd()
-            }
-        }
-    }
-
     private fun initBoltiveMonitor() {
         val boltiveConfiguration = BoltiveConfiguration(
-            "adl-test",
-            "GAM"
+            "adl-test"
         )
         boltiveMonitor = BoltiveMonitor(boltiveConfiguration)
     }
@@ -78,7 +66,7 @@ class InterstitialActivity : AppCompatActivity() {
                                 boltiveMonitor.stopCapturingInterstitial()
                             }
                         }
-                    interstitialAd?.show(this@InterstitialActivity)
+                    interstitialAd?.show(this@GamInterstitialActivity)
                 }
             })
     }

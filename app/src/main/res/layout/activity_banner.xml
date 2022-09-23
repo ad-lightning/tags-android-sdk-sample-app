@@ -12,31 +12,23 @@
             android:id="@+id/btnReload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="Reload"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
             android:id="@+id/adViewWrapper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="300dp"
+            android:minHeight="300dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/btnToInterstitial"
+            app:layout_constraintBottom_toTopOf="@+id/btnReload"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnReload" />
-
-        <Button
-            android:id="@+id/btnToInterstitial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="To Interstitial Example"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

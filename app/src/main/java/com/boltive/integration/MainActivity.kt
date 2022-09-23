@@ -2,80 +2,50 @@ package com.boltive.integration
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.boltive.api.AdViewConfiguration
-import com.boltive.api.BoltiveConfiguration
-import com.boltive.api.BoltiveListener
+import com.applovin.sdk.AppLovinSdk
 import com.boltive.api.BoltiveMonitor
-import com.boltive.integration.databinding.ActivityMainBinding
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.admanager.AdManagerAdView
+import com.boltive.integration.databinding.ActivityListBinding
+import com.boltive.integration.example.Example
+import com.boltive.integration.example.ExamplesRepository
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var boltiveMonitor: BoltiveMonitor
-    private lateinit var adView: AdManagerAdView
+    private lateinit var binding: ActivityListBinding
+    private lateinit var adapter: ArrayAdapter<Example>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_list)
 
         initViews()
-        initBoltiveMonitor()
-        initAd()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        boltiveMonitor.terminate()
+        initApplovinMax()
     }
 
     private fun initViews() {
-        supportActionBar?.title = "Boltive SDK v${BoltiveMonitor.SDK_VERSION} App"
+        supportActionBar?.title = "Boltive SDK v" + BoltiveMonitor.SDK_VERSION + " App"
         binding.apply {
-            btnToInterstitial.setOnClickListener {
+            adapter = ArrayAdapter(
+                this@MainActivity,
+                android.R.layout.simple_list_item_1,
+                ExamplesRepository.getAll()
+            )
+            listView.adapter = adapter
+            listView.setOnItemClickListener { _, _, position, _ ->
+                val example = adapter.getItem(position) ?: return@setOnItemClickListener
                 startActivity(
-                    Intent(this@MainActivity, InterstitialActivity::class.java)
+                    Intent(this@MainActivity, example.activity)
                 )
             }
-            btnReload.setOnClickListener {
-                adView.loadAd(AdRequest.Builder().build())
-            }
         }
     }
 
-    private fun initBoltiveMonitor() {
-        val boltiveConfiguration = BoltiveConfiguration(
-            "adl-test",
-            "GAM"
-        )
-        boltiveMonitor = BoltiveMonitor(boltiveConfiguration)
-    }
-
-    private fun initAd() {
-        val adRequest = AdRequest.Builder().build()
-        val bannerWidth = 300
-        val bannerHeight = 250
-        val adUnitId = "/21808260008/boltive-banner-with-ok-and-bad-url"
-
-        adView = AdManagerAdView(this)
-        adView.setAdSize(AdSize(bannerWidth, bannerHeight))
-        adView.adUnitId = adUnitId
-
-        adView.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                val boltiveListener = BoltiveListener { adView.loadAd(adRequest) }
-                val adViewConfiguration = AdViewConfiguration(320, 50, adUnitId)
-                boltiveMonitor.capture(adView, adViewConfiguration, boltiveListener)
-            }
-        }
-
-        binding.adViewWrapper.addView(adView)
-        adView.loadAd(adRequest)
+    private fun initApplovinMax() {
+        AppLovinSdk.getInstance(this).mediationProvider = "max"
+        AppLovinSdk.getInstance(this).initializeSdk { }
+        AppLovinSdk.getInstance(this).settings.setVerboseLogging(false)
     }
 
 }

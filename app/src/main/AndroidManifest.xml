@@ -22,19 +22,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".JavaMainActivity"
+            android:name=".implementation.gam.GamBannerJavaActivity"
             android:exported="false" />
-
         <activity
-            android:name=".InterstitialActivity"
+            android:name=".implementation.gam.GamInterstitialActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".implementation.gam.GamBannerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".implementation.applovin.ApplovinBannerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".implementation.applovin.ApplovinInterstitialActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"/>
+
+        <meta-data
+            android:name="applovin.sdk.key"
+            android:value="Kza6Rl19iItoW-XSk69XUUy1R-G1U-WkorsEOkw8p7VCIGdbtFwi_I3ZhFDiVpRwRNEPy1brkzBUWONFmd5ZpX" />
 
     </application>
 

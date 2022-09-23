@@ -44,6 +44,10 @@ dependencies {
     // GAM
     implementation 'com.google.android.gms:play-services-ads:21.1.0'
 
+    // Applovin MAX
+    implementation "com.applovin:applovin-sdk:11.3.2"
+    implementation "com.google.android.gms:play-services-ads-identifier:18.0.1" // For Applovin Max
+
     // Boltive
     implementation files("libs/boltive-android-sdk.aar")
 }

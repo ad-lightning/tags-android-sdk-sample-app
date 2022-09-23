@@ -1,7 +1,6 @@
-package com.boltive.integration;
+package com.boltive.integration.implementation.gam;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,22 +9,23 @@ import androidx.databinding.DataBindingUtil;
 import com.boltive.api.AdViewConfiguration;
 import com.boltive.api.BoltiveConfiguration;
 import com.boltive.api.BoltiveMonitor;
-import com.boltive.integration.databinding.ActivityMainBinding;
+import com.boltive.integration.R;
+import com.boltive.integration.databinding.ActivityBannerBinding;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.admanager.AdManagerAdView;
 
-public class JavaMainActivity extends AppCompatActivity {
+public class GamBannerJavaActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    private ActivityBannerBinding binding;
     private BoltiveMonitor boltiveMonitor;
     private AdManagerAdView adView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_banner);
 
         initViews();
         initBoltiveMonitor();
@@ -40,15 +40,13 @@ public class JavaMainActivity extends AppCompatActivity {
 
 
     private void initViews() {
-        getSupportActionBar().setTitle("Boltive SDK v" + BoltiveMonitor.SDK_VERSION + " App");
-        binding.btnToInterstitial.setVisibility(View.GONE);
-        binding.btnReload.setVisibility(View.GONE);
+        binding.btnReload.setOnClickListener(v -> {
+            adView.loadAd(new AdRequest.Builder().build());
+        });
     }
 
     private void initBoltiveMonitor() {
-        BoltiveConfiguration configuration = new BoltiveConfiguration(
-                "adl-test", "GAM"
-        );
+        BoltiveConfiguration configuration = new BoltiveConfiguration("adl-test");
         boltiveMonitor = new BoltiveMonitor(configuration);
     }
 
