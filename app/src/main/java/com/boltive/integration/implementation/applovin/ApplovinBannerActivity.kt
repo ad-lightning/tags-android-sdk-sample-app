@@ -20,7 +20,7 @@ class ApplovinBannerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBannerBinding
     private lateinit var boltiveMonitor: BoltiveMonitor
-    private lateinit var adView: MaxAdView
+    private var adView: MaxAdView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class ApplovinBannerActivity : AppCompatActivity() {
     private fun initViews() {
         binding.apply {
             btnReload.setOnClickListener {
-                adView.stopAutoRefresh()
+                adView?.stopAutoRefresh()
                 initAd()
             }
         }
@@ -54,12 +54,12 @@ class ApplovinBannerActivity : AppCompatActivity() {
         binding.adViewWrapper.removeAllViews()
         val adUnitId = if (Random.nextBoolean()) "c91cf5ec359f01da" else "757687e43c5651d9"
         adView = MaxAdView(adUnitId, this)
-        adView.setListener(object : MaxAdViewAdListener {
+        adView?.setListener(object : MaxAdViewAdListener {
             override fun onAdLoaded(ad: MaxAd?) {
                 val adViewConfiguration = AdViewConfiguration(300, 250, adUnitId)
-                boltiveMonitor.capture(adView, adViewConfiguration) {
-                    adView.stopAutoRefresh()
-                    (adView.parent as ViewGroup).removeView(adView)
+                boltiveMonitor.capture(adView ?: return, adViewConfiguration) {
+                    adView?.stopAutoRefresh()
+                    (adView?.parent as ViewGroup?)?.removeView(adView)
                 }
             }
 
@@ -72,7 +72,7 @@ class ApplovinBannerActivity : AppCompatActivity() {
             override fun onAdCollapsed(ad: MaxAd?) {}
         })
         binding.adViewWrapper.addView(adView)
-        adView.loadAd()
+        adView?.loadAd()
     }
 
 }
