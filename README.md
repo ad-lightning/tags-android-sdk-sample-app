@@ -140,19 +140,27 @@ Create Boltive monitor instance. <b>IMPORTANT</b> to set second parameter `AdNet
 Add `capture` call inside MaxAdViewAdListener's `onAdLoaded` with listener.
 
 ```java
-    maxAdView.setListener(new MaxAdViewAdListener() {
-        @Override
-        public void onAdLoaded(MaxAd ad) {
-            AdViewConfiguration adViewConfiguration = new AdViewConfiguration(
-                    "<banner width>", "<banner height>", "<your ad unit id>"
-            );
-            boltiveMonitor.capture(maxAdView, adViewConfiguration, () -> {
-                maxAdView.loadAd();
-            });
-        }
-        ...
-    });
-    maxAdView.loadAd();
+    private void initAd() {
+        adViewContainer.removeAllViews();
+
+        maxAdView = new MaxAdView(adUnitId, this);
+        maxAdView.setListener(new MaxAdViewAdListener() {
+            @Override
+            public void onAdLoaded(MaxAd ad) {
+                AdViewConfiguration adViewConfiguration = new AdViewConfiguration(
+                        "<banner width>", "<banner height>", "<your ad unit id>"
+                );
+                boltiveMonitor.capture(maxAdView, adViewConfiguration, () -> {
+                    maxAdView.destroy();
+                    initAd();
+                });
+            }
+            ...
+        });
+
+        adViewContainer.addView(maxAdView);
+        maxAdView.loadAd();
+    }
 ```
 
 Add `terminate` call when ad view destroyed or inside `onDestroy` of Activity (or Fragment).

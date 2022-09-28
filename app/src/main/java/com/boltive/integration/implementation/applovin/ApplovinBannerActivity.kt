@@ -1,7 +1,6 @@
 package com.boltive.integration.implementation.applovin
 
 import android.os.Bundle
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.applovin.mediation.MaxAd
@@ -58,8 +57,8 @@ class ApplovinBannerActivity : AppCompatActivity() {
             override fun onAdLoaded(ad: MaxAd?) {
                 val adViewConfiguration = AdViewConfiguration(300, 250, adUnitId)
                 boltiveMonitor.capture(adView ?: return, adViewConfiguration) {
-                    adView?.stopAutoRefresh()
-                    (adView?.parent as ViewGroup?)?.removeView(adView)
+                    adView?.destroy()
+                    initAd()
                 }
             }
 
