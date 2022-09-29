@@ -8,7 +8,7 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 
 - We assume that the app integrates Google Mobile Ads SDK and works with Google Ad Manager, however the SDK is not limited by this assumption, see [this section](https://github.com/ad-lightning/android-sdk-sample-app#other-ad-networks-and-sdks)
 
-- The current SDK version is 0.2 (private beta).
+- The current SDK version is 0.3 (private beta).
 
 ## Integration
 
@@ -131,7 +131,7 @@ Create Boltive monitor instance. <b>IMPORTANT</b> to set second parameter `AdNet
 
 ```java
     private final BoltiveMonitor boltiveMonitor = new BoltiveMonitor(
-        new BoltiveConfiguration("<your client id>", AdNetwork.APPLOVIN_MAX)
+        new BoltiveConfiguration("<your client id>", AdNetwork.APPLOVIN)
     );
 ```
 

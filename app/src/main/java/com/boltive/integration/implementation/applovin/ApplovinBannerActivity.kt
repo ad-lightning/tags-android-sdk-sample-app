@@ -1,6 +1,7 @@
 package com.boltive.integration.implementation.applovin
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.applovin.mediation.MaxAd
@@ -51,7 +52,13 @@ class ApplovinBannerActivity : AppCompatActivity() {
 
     private fun initAd() {
         binding.adViewWrapper.removeAllViews()
-        val adUnitId = if (Random.nextBoolean()) "c91cf5ec359f01da" else "757687e43c5651d9"
+        val adUnitId = if (Random.nextBoolean()) {
+            Log.d("BoltiveActivity", "Good ad")
+            "c91cf5ec359f01da"
+        } else {
+            Log.d("BoltiveActivity", "Bad ad")
+            "757687e43c5651d9"
+        }
         adView = MaxAdView(adUnitId, this)
         adView?.setListener(object : MaxAdViewAdListener {
             override fun onAdLoaded(ad: MaxAd?) {
