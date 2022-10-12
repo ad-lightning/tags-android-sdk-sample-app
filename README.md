@@ -12,7 +12,11 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 
 ## Integration
 
-1. Download and unzip the SDK archive.
+1. Download the [SDK zip archive](https://s3.amazonaws.com/sdk.boltive.com/android/boltive-android-sdk-0.3.7.zip) and unzip it: 
+```
+curl -O https://s3.amazonaws.com/sdk.boltive.com/android/boltive-android-sdk-0.3.7.zip
+unzip boltive-android-sdk-0.3.7.zip
+```
 2. Create `libs` directory inside your `app` module. 
 3. Copy `boltive-android-sdk.aar` library from archive into `libs`.
 4. Add Boltive SDK dependency in app's `build.gradle` file and sync Gradle.
