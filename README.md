@@ -8,7 +8,7 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 
 - SDK has been explicitly tested against GAM, AdMob, AppLovin MAX, however the SDK is not limited to these integration scenarios, please see [this section](https://github.com/ad-lightning/android-sdk-sample-app#other-ad-networks-and-sdks)
 
-- The current SDK version is 0.3 (private beta).
+- The current SDK version is 0.4 (private beta).
 
 ## Integration
 
@@ -195,6 +195,22 @@ Add `captureInterstitial` call before calling `interstitial.showAd()`, and `stop
         }
         ...
     });
+```
+
+## Additional Parameters
+
+You can set up additional parameters in BoltiveConfiguration for better targeting and blocking. 
+
+```
+    BoltiveConfiguration config = new BoltiveConfiguration("<your client id>");
+    
+    config.setAdvertiserId("<your advertiser id>");
+    config.setCampaignId("<your campaign id>");
+    config.setCreativeId("<your creative id>");
+    config.setLineItemId("<your line item id>");
+    config.setSspRefreshCode("<your ssp refresh code>");
+    
+    BoltiveMonitor monitor = new BoltiveMonitor(config);
 ```
 
 
