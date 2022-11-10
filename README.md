@@ -202,15 +202,16 @@ Add `captureInterstitial` call before calling `interstitial.showAd()`, and `stop
 You can set up additional parameters in BoltiveConfiguration for better targeting and blocking. 
 
 ```
-    BoltiveConfiguration config = new BoltiveConfiguration("<your client id>");
+    BoltiveTagDetails tagDetails = new BoltiveTagDetails("<your ad unit id>");
     
-    config.setAdvertiserId("<your advertiser id>");
-    config.setCampaignId("<your campaign id>");
-    config.setCreativeId("<your creative id>");
-    config.setLineItemId("<your line item id>");
-    config.setSspRefreshCode("<your ssp refresh code>");
+    tagDetails.setAdvertiserId("<your advertiser id>");
+    tagDetails.setCampaignId("<your campaign id>");
+    tagDetails.setCreativeId("<your creative id>");
+    tagDetails.setLineItemId("<your line item id>");
+    tagDetails.setSspRefreshCode("<your ssp refresh code>");
     
-    BoltiveMonitor monitor = new BoltiveMonitor(config);
+    AdViewConfiguration viewConfig = new AdViewConfiguration(300, 250, tagDetails);
+    monitor.capture(adView, viewConfig, () -> { ... })
 ```
 
 
