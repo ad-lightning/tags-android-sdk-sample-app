@@ -197,9 +197,9 @@ Add `captureInterstitial` call before calling `interstitial.showAd()`, and `stop
     });
 ```
 
-## Additional Parameters
+## Tag Details
 
-You can set up additional parameters in BoltiveConfiguration for better targeting and blocking. 
+As part of the `AdViewConfiguration` you can pass a `tagDetails` object, containing data handy for reporting and attribution of the ad blocking events.
 
 ```
     BoltiveTagDetails tagDetails = new BoltiveTagDetails("<your ad unit id>");
