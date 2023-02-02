@@ -123,12 +123,15 @@ Add `captureInterstitial` call before calling `interstitial.show`.  Also make su
     };
 ```
 
+You should pass more information about your app using [BoltiveTagDetails](#tag-details) object inside AdViewConfiguration's constructor.
+
 **Note:** When Boltive SDK detects an offensive interstitial - it automatically blocks and dismisses it (contrary to the behavior for banners, where it is a developer responsibility), providing you with a callback (you implement it as an anonymous function passed to `BoltiveMonitor.captureInterstitial`) where you can reload the interstitial and/or perform any other side effects as necessary.
 
 
 ### Applovin MAX: Create Boltive Monitor
 
-Create Boltive monitor instance. <b>IMPORTANT</b> to set second parameter `AdNetwork.APPLOVIN_MAX`.
+Create Boltive monitor instance. <b>IMPORTANT</b> to set second parameter `AdNetwork.APPLOVIN_MAX`. You should pass more information about your app using [BoltiveTagDetails](#tag-details) object inside AdViewConfiguration's constructor.
+
 
 ```java
     private final BoltiveMonitor boltiveMonitor = new BoltiveMonitor(
@@ -177,6 +180,8 @@ Add `terminate` call when ad view is destroyed or inside the `onDestroy` method 
 ### Applovin MAX Interstitial
 
 Add `captureInterstitial` call before calling `interstitial.showAd()`, and `stopCapturingInterstitial` inside `onAdHidden`.
+You should pass more information about your app using [BoltiveTagDetails](#tag-details) object inside AdViewConfiguration's constructor.
+
 
 ```java
     MaxInterstitialAd interstitial = new MaxInterstitialAd("<your ad unit id>", this);
