@@ -51,7 +51,7 @@ Create Boltive monitor instance.
 ```
 
 Add `capture` call inside AdListener's `onAdLoaded` with listener. 
-You should pass more information about your app using [BoltiveTagDetails](##tag-details) object inside AdViewConfiguration's constructor. 
+You should pass more information about your app using [BoltiveTagDetails](#tag-details) object inside AdViewConfiguration's constructor. 
 
 ```java
     AdRequest adRequest = new AdRequest.Builder().build();
