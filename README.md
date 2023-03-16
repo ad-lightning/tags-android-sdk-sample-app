@@ -107,7 +107,7 @@ Add `captureInterstitial` call before calling `interstitial.show`.  Also make su
             AdViewConfiguration viewConfiguration = new AdViewConfiguration(
                 320, 480, "<your ad unit id>"
             );
-            boltiveMonitor.captureInterstitial(getApplication(), viewConfiguration, ()-> {
+            boltiveMonitor.captureInterstitial(getApplication(), viewConfiguration, interstitialAd, ()-> {
                 // Any Actions
             })
         
@@ -123,7 +123,7 @@ Add `captureInterstitial` call before calling `interstitial.show`.  Also make su
     };
 ```
 
-You should pass more information about your app using [BoltiveTagDetails](#tag-details) object inside AdViewConfiguration's constructor.
+You should pass more information about your app using [BoltiveTagDetails](#tag-details) object inside AdViewConfiguration's constructor. Don't forget to pass InterstitialAd parameter to `BoltiveMonitor.captureInterstitial`.
 
 **Note:** When Boltive SDK detects an offensive interstitial - it automatically blocks and dismisses it (contrary to the behavior for banners, where it is a developer responsibility), providing you with a callback (you implement it as an anonymous function passed to `BoltiveMonitor.captureInterstitial`) where you can reload the interstitial and/or perform any other side effects as necessary.
 
