@@ -8,14 +8,14 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 
 - SDK has been explicitly tested against GAM, AdMob, AppLovin MAX, however the SDK is not limited to these integration scenarios, please see [this section](https://github.com/ad-lightning/android-sdk-sample-app#other-ad-networks-and-sdks)
 
-- The current SDK version is 1.1.
+- The current SDK version is 1.2.
 
 ## Integration
 
-1. Download the [SDK zip archive](http://sdk.boltive.com.s3.amazonaws.com/android/boltive-android-sdk-1.1.13.zip) and unzip it: 
+1. Download the [SDK zip archive](http://d29z9h4vafd34g.cloudfront.net/android/boltive-android-sdk-1.2.16.zip) and unzip it: 
 ```
-curl -O http://sdk.boltive.com.s3.amazonaws.com/android/boltive-android-sdk-1.1.13.zip
-unzip boltive-android-sdk-1.1.13.zip
+curl -O http://d29z9h4vafd34g.cloudfront.net/android/boltive-android-sdk-1.2.16.zip
+unzip boltive-android-sdk-1.2.16.zip
 ```
 2. Create `libs` directory inside your `app` module. 
 3. Copy `boltive-android-sdk.aar` library from archive into `libs`.
@@ -220,7 +220,7 @@ As part of the `AdViewConfiguration` you can pass a `tagDetails` object, contain
     AdViewConfiguration viewConfig = new AdViewConfiguration(300, 250, tagDetails);
     monitor.capture(adView, viewConfig, () -> { ... })
 ```
-
+Please note that if any of the ad server details properties are not set (`advertiserId`, `campaignId`, `creativeId`, `lineItemId`) - Boltive SDK will attempt to fill them from `ResponseInfo` object in case of Google Mobile Ads SDK. 
 
 ## Other Ad Networks and SDKs
 
