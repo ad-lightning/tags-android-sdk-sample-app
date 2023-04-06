@@ -203,6 +203,21 @@ You should pass more information about your app using [BoltiveTagDetails](#tag-d
     });
 ```
 
+## Memory leaks
+
+Consider using `WeakReference` for the ad view reference that you use
+inside the `BoltiveListener` callback that is passed into the `capture()` call to prevent memory leaks.
+
+```                
+    WeakReference<AdView> reference = new WeakReference<>(adView);
+    boltiveMonitor.capture(adView, adViewConfiguration, () -> {
+        AdView adView = reference.get();
+        if (adView != null) {
+            adView.loadAd(adRequest);
+        }
+    });
+```
+
 ## Tag Details
 
 As part of the `AdViewConfiguration` you can pass a `tagDetails` object, containing data handy for reporting and attribution of the ad blocking events.
