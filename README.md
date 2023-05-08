@@ -12,10 +12,10 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 
 ## Integration
 
-1. Download the [SDK zip archive](http://d29z9h4vafd34g.cloudfront.net/android/boltive-android-sdk-1.2.16.zip) and unzip it: 
+1. Download the [SDK zip archive](http://d29z9h4vafd34g.cloudfront.net/android/boltive-android-sdk-1.3.18.zip) and unzip it: 
 ```
-curl -O http://d29z9h4vafd34g.cloudfront.net/android/boltive-android-sdk-1.2.16.zip
-unzip boltive-android-sdk-1.2.16.zip
+curl -OL http://d29z9h4vafd34g.cloudfront.net/android/boltive-android-sdk-1.3.18.zip
+unzip boltive-android-sdk-1.3.18.zip
 ```
 2. Create `libs` directory inside your `app` module. 
 3. Copy `boltive-android-sdk.aar` library from archive into `libs`.
