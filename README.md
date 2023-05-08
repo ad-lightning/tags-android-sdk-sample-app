@@ -209,15 +209,30 @@ You should pass more information about your app using [BoltiveTagDetails](#tag-d
 Consider using `WeakReference` for the ad view reference that you use
 inside the `BoltiveListener` callback that is passed into the `capture()` call to prevent memory leaks.
 
-```                
-    WeakReference<AdView> reference = new WeakReference<>(adView);
-    boltiveMonitor.capture(adView, adViewConfiguration, () -> {
-        AdView adView = reference.get();
-        if (adView != null) {
-            adView.loadAd(adRequest);
+```    
+    private static class SafeBoltiveListener implements BoltiveListener {
+
+        private final WeakReference<AdView> adView;
+
+        public SafeBoltiveListener(AdView adView) {
+            this.adView = new WeakReference<>(adView);
         }
-    });
+
+        @Override
+        public void onAdBlocked() {
+            AdView view = this.adView.get();
+            if (view != null) {
+                view.loadAd();
+            }
+        }
+    }
 ```
+
+Usage:
+```                
+    boltiveMonitor.capture(adView, adViewConfiguration, new SafeBoltiveListener(adView));
+```
+
 
 ## Tag Details
 
