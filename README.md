@@ -8,7 +8,7 @@ Boltive Android SDK is a native Android library for intercepting malicious ad cr
 
 - SDK has been explicitly tested against GAM, AdMob, AppLovin MAX, however the SDK is not limited to these integration scenarios, please see [this section](https://github.com/ad-lightning/android-sdk-sample-app#other-ad-networks-and-sdks)
 
-- The current SDK version is 1.2. See [release notes](CHANGELOG.md).
+- The current SDK version is 1.3. See [release notes](CHANGELOG.md).
 
 ## Integration
 
