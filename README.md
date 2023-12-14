@@ -36,11 +36,12 @@ within the `AdListener`'s `onAdLoaded()` method, passing it an ad banner, client
 and `BoltiveListener` instance as parameters.  `BoltiveListener` is called in the event
 when `BoltiveMonitor` detects an ad that is supposed to be blocked.
 
-**Note**: Unlike web, on mobile `BoltiveMonitor` does not actually block or prevent any banner ads from
-rendering - it only reports them and signals to the app native code. **It is your responsibility as
-the app developer to take appropriate action in the callback closure**: i.e. to reload and refresh the
-banner, render a different ad unit, remove the banner alltogether etc. The most common action to
-take would be to reload the banner.
+**Note**: `BoltiveMonitor` blocker will prevent the malicious ad creative from rendering - so the ad would become blank, 
+however it will not automatically remove the native banner view from the screen (so worst case the user will see a blank ad).  
+It will send a signal to the app native code (via the callback mechanism).   
+**Then it is the responsibility of the app developer to take the appropriate action in the callback function**: f.e. reload and refresh the
+banner, render a different ad unit, remove the banner altogether etc. The most common action to
+take would be to call the native method that would reload the banner.
 
 Create Boltive monitor instance.
 
