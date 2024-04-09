@@ -26,6 +26,10 @@ class GamInterstitialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_banner)
 
+        binding.btnReload.setOnClickListener {
+            initAd()
+        }
+
         initBoltiveMonitor()
         initAd()
     }
