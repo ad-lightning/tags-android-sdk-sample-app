@@ -51,7 +51,7 @@ class GamBannerActivity : AppCompatActivity() {
         val adRequest = AdRequest.Builder().build()
         val bannerWidth = 300
         val bannerHeight = 250
-        val adUnitId = "/21808260008/boltive-banner-with-ok-and-bad-url"
+        val adUnitId = "/21808260008/btest_banner_random"
 
         adView = AdManagerAdView(this)
         adView.setAdSize(AdSize(bannerWidth, bannerHeight))

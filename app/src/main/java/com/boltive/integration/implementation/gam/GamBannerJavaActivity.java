@@ -1,11 +1,9 @@
 package com.boltive.integration.implementation.gam;
 
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import com.boltive.api.AdViewConfiguration;
 import com.boltive.api.BoltiveConfiguration;
 import com.boltive.api.BoltiveMonitor;
@@ -54,7 +52,7 @@ public class GamBannerJavaActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         int bannerWidth = 300;
         int bannerHeight = 250;
-        String adUnitId = "/21808260008/boltive-banner-with-ok-and-bad-url";
+        String adUnitId = "/21808260008/btest_banner_random";
 
         adView = new AdManagerAdView(this);
         adView.setAdSize(new AdSize(bannerWidth, bannerHeight));

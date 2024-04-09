@@ -43,7 +43,7 @@ class GamInterstitialActivity : AppCompatActivity() {
     }
 
     private fun initAd() {
-        val adUnitId = if (Random.nextBoolean()) "/6499/example/interstitial" else "/21808260008/boltive-interstial-with-bad-url"
+        val adUnitId = if (Random.nextBoolean()) "/6499/example/interstitial" else "/21808260008/btest_interstitial_bad"
         val adRequest = AdManagerAdRequest.Builder().build()
         val viewConfiguration = AdViewConfiguration(320, 480, adUnitId)
 
