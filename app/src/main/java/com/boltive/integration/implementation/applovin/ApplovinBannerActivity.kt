@@ -46,7 +46,7 @@ class ApplovinBannerActivity : AppCompatActivity() {
     }
 
     private fun initBoltiveMonitor() {
-        val boltiveConfiguration = BoltiveConfiguration("adl-test", AdNetwork.APPLOVIN_MAX)
+        val boltiveConfiguration = BoltiveConfiguration("adl-test", AdNetwork.APPLOVIN)
         boltiveMonitor = BoltiveMonitor(boltiveConfiguration)
     }
 
