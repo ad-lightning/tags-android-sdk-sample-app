@@ -49,5 +49,5 @@ dependencies {
     implementation "com.google.android.gms:play-services-ads-identifier:18.0.1" // For Applovin Max
 
     // Boltive
-    implementation files("libs/boltive-android-sdk.aar")
+    implementation 'com.boltive:boltive-sdk:1.3.18'
 }
