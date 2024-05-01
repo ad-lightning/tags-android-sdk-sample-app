@@ -1,3 +1,5 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -10,6 +12,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url "https://packagecloud.io/ValentinPostindustria/boltive/maven2"
+        }
     }
 }
 rootProject.name = "BoltiveIntegration"
