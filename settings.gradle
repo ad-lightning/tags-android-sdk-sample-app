@@ -13,7 +13,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url "https://packagecloud.io/ValentinPostindustria/boltive/maven2"
+            url "https://packagecloud.io/Boltive/Mobile-SDK/maven2"
         }
     }
 }
