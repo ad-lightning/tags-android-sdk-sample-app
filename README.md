@@ -25,16 +25,16 @@ repositories {
 2. Add Boltive dependency
 ```
 dependencies {
-    implementation "com.boltive:boltive-sdk:1.3.18"
+    implementation "com.boltive:boltive-sdk:1.3.19"
 }
 ```
 
 ### Manual downloading AAR
 
-1. Download the [SDK zip archive](http://d29z9h4vafd34g.cloudfront.net/android/boltive-android-sdk-1.3.18.zip) and unzip it: 
+1. Download the [SDK zip archive](http://d29z9h4vafd34g.cloudfront.net/android/boltive-android-sdk-1.3.19.zip) and unzip it: 
 ```
-curl -OL http://d29z9h4vafd34g.cloudfront.net/android/boltive-android-sdk-1.3.18.zip
-unzip boltive-android-sdk-1.3.18.zip
+curl -OL http://d29z9h4vafd34g.cloudfront.net/android/boltive-android-sdk-1.3.19.zip
+unzip boltive-android-sdk-1.3.19.zip
 ```
 2. Create `libs` directory inside your `app` module. 
 3. Copy `boltive-android-sdk.aar` library from archive into `libs`.
